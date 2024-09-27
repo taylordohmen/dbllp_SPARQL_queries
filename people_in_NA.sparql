@@ -1,0 +1,214 @@
+PREFIX dblp: <https://dblp.org/rdf/schema#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+SELECT ?Name ?Affiliation (COUNT(?publication) AS ?PublicationCount) 
+WHERE {
+
+    ?publication dblp:publishedInStream ?venue .  
+    FILTER (?venue IN (
+		# CONFERENCES
+		
+		# theory
+        <https://dblp.org/streams/conf/lics>, 
+        <https://dblp.org/streams/conf/icalp>, 
+        <https://dblp.org/streams/conf/mfcs>, 
+        <https://dblp.org/streams/conf/stoc>, 
+        <https://dblp.org/streams/conf/focs>,
+        <https://dblp.org/streams/conf/concur>,
+        <https://dblp.org/streams/conf/stacs>,
+        <https://dblp.org/streams/conf/lata>,
+        <https://dblp.org/streams/conf/ccc>,
+        <https://dblp.org/streams/conf/soda>,
+		<https://dblp.org/streams/conf/dlt>,
+		<https://dblp.org/streams/conf/rp>,
+		<https://dblp.org/streams/conf/gandalf>,
+		<https://dblp.org/streams/conf/ciaa>,
+		<https://dblp.org/streams/conf/issac>,
+		<https://dblp.org/streams/conf/cie>,
+		<https://dblp.org/streams/conf/fct>,
+		<https://dblp.org/streams/conf/isaac>,
+		<https://dblp.org/streams/conf/itcs>,
+		<https://dblp.org/streams/conf/latin>,
+		<https://dblp.org/streams/conf/learnaut>,
+		<https://dblp.org/streams/conf/fsttcs>,
+		<https://dblp.org/streams/conf/ramics>,
+		<https://dblp.org/streams/conf/tamc>,
+		<https://dblp.org/streams/conf/words>,
+		<https://dblp.org/streams/conf/wollic>,
+		<https://dblp.org/streams/conf/csl>,
+		<https://dblp.org/streams/conf/ipco>,
+		<https://dblp.org/streams/conf/esa>,
+
+		# formal methods / verification / programming languages / automated reasoning / system analysis
+        <https://dblp.org/streams/conf/cav>,
+		<https://dblp.org/streams/conf/tacas>,
+		<https://dblp.org/streams/conf/atva>,
+		<https://dblp.org/streams/conf/fscd>,
+		<https://dblp.org/streams/conf/sas>,
+		<https://dblp.org/streams/conf/fossacs>,
+		<https://dblp.org/streams/conf/fm>,
+		<https://dblp.org/streams/conf/qest>,
+		<https://dblp.org/streams/conf/cade>,
+		<https://dblp.org/streams/conf/nfm>,
+		<https://dblp.org/streams/conf/ijcar>,
+		<https://dblp.org/streams/conf/popl>,
+		<https://dblp.org/streams/conf/rta>,
+		
+		# artificial intelligence / machine learning
+		<https://dblp.org/streams/conf/jelia>,
+		<https://dblp.org/streams/conf/colt>,
+		<https://dblp.org/streams/conf/alt>,
+		<https://dblp.org/streams/conf/icml>,
+		<https://dblp.org/streams/conf/aaai>,
+		<https://dblp.org/streams/conf/ijcai>,
+		<https://dblp.org/streams/conf/aamas>,
+		<https://dblp.org/streams/conf/kr>,
+		<https://dblp.org/streams/conf/icaps>,
+		<https://dblp.org/streams/conf/cdc>,
+		<https://dblp.org/streams/conf/uai>,
+		<https://dblp.org/streams/conf/ecai>,
+		<https://dblp.org/streams/conf/nips>,
+		
+		# other
+		<https://dblp.org/streams/conf/fun>,
+
+		# JOURNALS
+		<https://dblp.org/streams/journals/lmcs>,
+		<https://dblp.org/streams/journals/jacm>,
+		<https://dblp.org/streams/journals/cacm>,
+		<https://dblp.org/streams/journals/fac>,
+		<https://dblp.org/streams/journals/talg>,
+		<https://dblp.org/streams/journals/toct>,
+		<https://dblp.org/streams/journals/tocl>,
+		<https://dblp.org/streams/journals/jsyml>,
+		<https://dblp.org/streams/journals/cpc>,
+		<https://dblp.org/streams/journals/mscs>,
+		<https://dblp.org/streams/journals/apal>,
+		<https://dblp.org/streams/journals/automatica>,
+		<https://dblp.org/streams/journals/dam>,
+		<https://dblp.org/streams/journals/dm>,
+		<https://dblp.org/streams/journals/ipl>,
+		<https://dblp.org/streams/journals/jlap>,
+		<https://dblp.org/streams/journals/jsc>,
+		<https://dblp.org/streams/journals/ior>,
+		<https://dblp.org/streams/journals/mor>,
+		<https://dblp.org/streams/journals/fuin>,
+		<https://dblp.org/streams/journals/fttcs>,
+		<https://dblp.org/streams/journals/acta>,
+		<https://dblp.org/streams/journals/algorithmica>,
+		<https://dblp.org/streams/journals/amai>,
+		<https://dblp.org/streams/journals/anor>,
+		<https://dblp.org/streams/journals/aml>,
+		<https://dblp.org/streams/journals/jar>,
+		<https://dblp.org/streams/journals/combinatorica>,
+		<https://dblp.org/streams/journals/cc>,
+		<https://dblp.org/streams/journals/fmsd>,
+		<https://dblp.org/streams/journals/ijgt>,
+		<https://dblp.org/streams/journals/sttt>,
+		<https://dblp.org/streams/journals/mmor>,
+		<https://dblp.org/streams/journals/mst>,
+		<https://dblp.org/streams/journals/mlq>,
+		<https://dblp.org/streams/journals/ijfcs>,
+		<https://dblp.org/streams/journals/jml>,
+		<https://dblp.org/streams/journals/geb>,
+		<https://dblp.org/streams/journals/tcs>,
+		<https://dblp.org/streams/journals/siamcomp>,
+		<https://dblp.org/streams/journals/siamdm>,
+		<https://dblp.org/streams/journals/siamjo>
+    ))
+	
+    ?publication dblp:yearOfPublication ?year .
+
+	?publication dblp:authoredBy ?author .
+
+    ?author rdfs:label ?Name .
+    
+    ?author dblp:primaryAffiliation ?Affiliation .
+	FILTER(
+	    ! CONTAINS(?Affiliation, "Austria") &&
+		! CONTAINS(?Affiliation, "India") &&
+		! CONTAINS(?Affiliation, "Israel") &&
+		! CONTAINS(?Affiliation, "UK") &&
+		! CONTAINS(?Affiliation, "Denmark") &&
+		! CONTAINS(?Affiliation, "Germany") &&
+		! CONTAINS(?Affiliation, "Sweden") &&
+		! CONTAINS(?Affiliation, "France") &&
+		! CONTAINS(?Affiliation, "Munich") &&
+		! CONTAINS(?Affiliation, "Singapore") &&
+		! CONTAINS(?Affiliation, "Belgium") &&
+		! CONTAINS(?Affiliation, "Bergen") &&
+		! CONTAINS(?Affiliation, "Italy") &&
+		! CONTAINS(?Affiliation, "Poland") &&
+		! CONTAINS(?Affiliation, "Japan") &&
+		! CONTAINS(?Affiliation, "Freiburg") &&
+		! CONTAINS(?Affiliation, "Dortmund") &&
+		! CONTAINS(?Affiliation, "Czech") &&
+		! CONTAINS(?Affiliation, "Aachen") &&
+		! CONTAINS(?Affiliation, "Netherlands") &&
+		! CONTAINS(?Affiliation, "Tokyo") &&
+		! CONTAINS(?Affiliation, "Switzerland") &&
+		! CONTAINS(?Affiliation, "Finland") &&
+		! CONTAINS(?Affiliation, "Australia") &&
+		! CONTAINS(?Affiliation, "Hong Kong") &&
+		! CONTAINS(?Affiliation, "China") &&
+		! CONTAINS(?Affiliation, "New Zealand") &&
+		! CONTAINS(?Affiliation, "Korea") &&
+		! CONTAINS(?Affiliation, "Autria") &&
+		! CONTAINS(?Affiliation, "Spain") &&
+		! CONTAINS(?Affiliation, "Tel Aviv") &&
+		! CONTAINS(?Affiliation, "Iceland") &&
+		! CONTAINS(?Affiliation, "Russia") &&
+		! CONTAINS(?Affiliation, "Brno") &&
+		! CONTAINS(?Affiliation, "ä") &&
+		! CONTAINS(?Affiliation, "ü") &&
+		! CONTAINS(?Affiliation, "École") &&
+		! CONTAINS(?Affiliation, "Taiwan") &&
+		! CONTAINS(?Affiliation, "Estonia") &&
+		! CONTAINS(?Affiliation, "United Kingdom") &&
+		! CONTAINS(?Affiliation, "Greece") &&
+		! CONTAINS(?Affiliation, "Brazil") &&
+		! CONTAINS(?Affiliation, "Chile") &&
+		! CONTAINS(?Affiliation, "Slovenija") &&
+		! CONTAINS(?Affiliation, "Hungary") &&
+		! CONTAINS(?Affiliation, "Erlangen") &&
+		! CONTAINS(?Affiliation, "Mexico") &&
+		! CONTAINS(?Affiliation, "Luxembourg") &&
+		! CONTAINS(?Affiliation, "Paris") &&
+		! CONTAINS(?Affiliation, "Liverpool") &&
+		! CONTAINS(?Affiliation, "Lebanon") &&
+		! CONTAINS(?Affiliation, "Chennai") &&
+		! CONTAINS(?Affiliation, "Karlsruhe") &&
+		! CONTAINS(?Affiliation, "Bonn") &&
+		! CONTAINS(?Affiliation, "Warsaw") &&
+		! CONTAINS(?Affiliation, "TU") &&
+		! CONTAINS(?Affiliation, "Tata Institute of Fundamental Research") &&
+		! CONTAINS(?Affiliation, "Prague") &&
+		! CONTAINS(?Affiliation, "Oxford") &&
+		! CONTAINS(?Affiliation, "Slovakia") &&
+		! CONTAINS(?Affiliation, "Rennes") &&
+		! CONTAINS(?Affiliation, "Kiel") &&
+		! CONTAINS(?Affiliation, "South Africa") &&
+		! CONTAINS(?Affiliation, "Romania") &&
+		! CONTAINS(?Affiliation, "Saudi Arabia") &&
+		! CONTAINS(?Affiliation, "Argentina") &&
+		! CONTAINS(?Affiliation, "Kaiserslautern") &&
+		! CONTAINS(?Affiliation, "Bruxelles") &&
+		! CONTAINS(?Affiliation, "Bristol") &&
+		! CONTAINS(?Affiliation, "Utrecht") &&
+		! CONTAINS(?Affiliation, "Cyprus") &&
+		! CONTAINS(?Affiliation, "Catalonia") &&
+		! CONTAINS(?Affiliation, "Turin") &&
+		! CONTAINS(?Affiliation, "UAE") &&
+		! CONTAINS(?Affiliation, "Ljubljana") &&
+		! CONTAINS(?Affiliation, "Grenoble") &&
+		! CONTAINS(?Affiliation, "Groningen") &&
+		! CONTAINS(?Affiliation, "Sydney") &&
+		! CONTAINS(?Affiliation, "Hungarian") &&
+		! CONTAINS(?Affiliation, "Slovenia")
+    )
+}
+GROUP BY ?author ?Name ?Affiliation
+HAVING(YEAR(MAX(?year)) > 2022)
+ORDER BY DESC(?PublicationCount)
+LIMIT 300
