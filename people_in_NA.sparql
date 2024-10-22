@@ -2,7 +2,7 @@ PREFIX dblp: <https://dblp.org/rdf/schema#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 
-SELECT ?2Name ?1Affiliation (COUNT(?theory_pub) AS ?3Theory) (COUNT(?fm_pub) AS ?4FM) (COUNT(?ai_pub) AS ?5AI) (COUNT(?other_pub) AS ?6Other) ((?3Theory + ?4FM + ?5AI + ?6Other) AS ?7Total) (((?3Theory + ?4FM + 0.75*?5AI + 0.75*?6Other)) AS ?SCORE)
+SELECT ?2Name ?1Affiliation (COUNT(?theory_pub) AS ?Theory) (COUNT(?fm_pub) AS ?FM) (COUNT(?ai_pub) AS ?AI_ML) (COUNT(?orgt_pub) AS ?OR_GT) (COUNT(?other_pub) AS ?Other) ((?Theory + ?FM + ?AI_ML + ?OR_GT + ?Other) AS ?Total)
 WHERE {
 	{
 		?theory_pub dblp:publishedInStream ?theory_venue .
@@ -40,38 +40,38 @@ WHERE {
 			<https://dblp.org/streams/conf/esa>,
 				# specialized other topics
 			<https://dblp.org/streams/conf/ramics>,
-			<https://dblp.org/streams/conf/words>,
+			<https://dblp.org/streams/conf/words>
 					
 			# JOURNALS
-			<https://dblp.org/streams/journals/mst>,
-			<https://dblp.org/streams/journals/mlq>,
-			<https://dblp.org/streams/journals/ijfcs>,
-			<https://dblp.org/streams/journals/jml>,
-			<https://dblp.org/streams/journals/combinatorica>,
-			<https://dblp.org/streams/journals/cc>,
-			<https://dblp.org/streams/journals/aml>,
-			<https://dblp.org/streams/journals/fuin>,
-			<https://dblp.org/streams/journals/fttcs>,
-			<https://dblp.org/streams/journals/acta>,
-			<https://dblp.org/streams/journals/algorithmica>,
-			<https://dblp.org/streams/journals/cpc>,
-			<https://dblp.org/streams/journals/mscs>,
-			<https://dblp.org/streams/journals/apal>,
-			<https://dblp.org/streams/journals/dam>,
-			<https://dblp.org/streams/journals/dm>,
-			<https://dblp.org/streams/journals/ipl>,
-			<https://dblp.org/streams/journals/jlap>,
-			<https://dblp.org/streams/journals/jsc>,
-			<https://dblp.org/streams/journals/fac>,
-			<https://dblp.org/streams/journals/talg>,
-			<https://dblp.org/streams/journals/toct>,
-			<https://dblp.org/streams/journals/tocl>,
-			<https://dblp.org/streams/journals/jsyml>,
-			<https://dblp.org/streams/journals/lmcs>,
-			<https://dblp.org/streams/journals/tcs>,
-			<https://dblp.org/streams/journals/siamcomp>,
-			<https://dblp.org/streams/journals/siamdm>,
-			<https://dblp.org/streams/journals/siamjo>
+			# <https://dblp.org/streams/journals/mst>,
+			# <https://dblp.org/streams/journals/mlq>,
+			# <https://dblp.org/streams/journals/ijfcs>,
+			# <https://dblp.org/streams/journals/jml>,
+			# <https://dblp.org/streams/journals/combinatorica>,
+			# <https://dblp.org/streams/journals/cc>,
+			# <https://dblp.org/streams/journals/aml>,
+			# <https://dblp.org/streams/journals/fuin>,
+			# <https://dblp.org/streams/journals/fttcs>,
+			# <https://dblp.org/streams/journals/acta>,
+			# <https://dblp.org/streams/journals/algorithmica>,
+			# <https://dblp.org/streams/journals/cpc>,
+			# <https://dblp.org/streams/journals/mscs>,
+			# <https://dblp.org/streams/journals/apal>,
+			# <https://dblp.org/streams/journals/dam>,
+			# <https://dblp.org/streams/journals/dm>,
+			# <https://dblp.org/streams/journals/ipl>,
+			# <https://dblp.org/streams/journals/jlap>,
+			# <https://dblp.org/streams/journals/jsc>,
+			# <https://dblp.org/streams/journals/fac>,
+			# <https://dblp.org/streams/journals/talg>,
+			# <https://dblp.org/streams/journals/toct>,
+			# <https://dblp.org/streams/journals/tocl>,
+			# <https://dblp.org/streams/journals/jsyml>,
+			# <https://dblp.org/streams/journals/lmcs>,
+			# <https://dblp.org/streams/journals/tcs>,
+			# <https://dblp.org/streams/journals/siamcomp>,
+			# <https://dblp.org/streams/journals/siamdm>,
+			# <https://dblp.org/streams/journals/siamjo>
 		))
 		?theory_pub dblp:authoredBy ?author .
 		?theory_pub dblp:yearOfPublication ?year .
@@ -95,12 +95,12 @@ WHERE {
 			<https://dblp.org/streams/conf/ijcar>,
 			<https://dblp.org/streams/conf/popl>,
 			<https://dblp.org/streams/conf/rta>,
-			<https://dblp.org/streams/conf/cdc>,
+			<https://dblp.org/streams/conf/cdc>
 			# JOURNALS
-			<https://dblp.org/streams/journals/jar>,
-			<https://dblp.org/streams/journals/fmsd>,
-			<https://dblp.org/streams/journals/automatica>,
-			<https://dblp.org/streams/journals/sttt>
+			# <https://dblp.org/streams/journals/jar>,
+			# <https://dblp.org/streams/journals/fmsd>,
+			# <https://dblp.org/streams/journals/automatica>,
+			# <https://dblp.org/streams/journals/sttt>
 			
 		))
 		?fm_pub dblp:authoredBy ?author .
@@ -122,12 +122,28 @@ WHERE {
 			<https://dblp.org/streams/conf/icaps>,
 			<https://dblp.org/streams/conf/uai>,
 			<https://dblp.org/streams/conf/ecai>,
-			<https://dblp.org/streams/conf/nips>,
+			<https://dblp.org/streams/conf/nips>
 			# JOURNALS
-			<https://dblp.org/streams/journals/amai>
+			# <https://dblp.org/streams/journals/amai>
 		))
 		?ai_pub dblp:authoredBy ?author .
 		?ai_pub dblp:yearOfPublication ?year .
+	}
+	UNION 
+	{
+		?orgt_pub dblp:publishedInStream ?orgt_venue .
+		FILTER (?orgt_venue IN(
+				# game theory
+			<https://dblp.org/streams/journals/ijgt>,
+			<https://dblp.org/streams/journals/geb>,
+				# operations research
+			<https://dblp.org/streams/journals/ior>,
+			<https://dblp.org/streams/journals/anor>,
+			<https://dblp.org/streams/journals/mmor>,
+			<https://dblp.org/streams/journals/mor>
+		))
+		?orgt_pub dblp:authoredBy ?author .
+		?orgt_pub dblp:yearOfPublication ?year .
 	}
 	UNION
 	{
@@ -138,15 +154,7 @@ WHERE {
 			# JOURNALS
 				# general audience ACM publications
 			<https://dblp.org/streams/journals/jacm>,
-			<https://dblp.org/streams/journals/cacm>,
-				# game theory
-			<https://dblp.org/streams/journals/ijgt>,
-			<https://dblp.org/streams/journals/geb>,
-				# operations research
-			<https://dblp.org/streams/journals/ior>,
-			<https://dblp.org/streams/journals/anor>,
-			<https://dblp.org/streams/journals/mmor>,
-			<https://dblp.org/streams/journals/mor>
+			<https://dblp.org/streams/journals/cacm>
 		))
 		?other_pub dblp:authoredBy ?author .
 		?other_pub dblp:yearOfPublication ?year .
@@ -247,6 +255,6 @@ WHERE {
     )
 }
 GROUP BY ?author ?2Name ?1Affiliation
-HAVING(YEAR(MAX(?year)) > 2022 && ?3Theory > 0 && ?4FM > 0 && ?5AI > 0)
-ORDER BY DESC(?SCORE)
+HAVING(YEAR(MAX(?year)) > 2022 && ?Theory > 0 && ?FM > 0)
+ORDER BY DESC(?Total)
 LIMIT 300
